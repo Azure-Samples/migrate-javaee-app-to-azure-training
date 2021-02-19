@@ -4,14 +4,6 @@ __This guide is part of the [migrate Java EE app to Azure training](../README.md
 
 How to setup a GitHub Actions workflow file and the necessary secrets to continuously deploy your Java EE app.
 
----
-
-Feedback notes:
-
-- Use CLI, OneDeploy to deploy  scripts, driver, and deescriptors
-- Use "preview" emoji to tell rader that in the future they won't have to use the AZure CLI to do the deployment step
-- Add instructions to generate Service Principal
-
 ## Overview of GitHub Actions
 
 GitHub Actions is an automation framework with CI/CD built-in and makes it easy to automate your software development workflows. Your automation can be triggered on events like when a commit is pushed, a comment is made, a pull request is opened, or on a schedule. These workflows are stored as `.yml` files in the `.github/workflows` directory of your repository. In this module, you will learn how to define a workflow to build and deploy a Java EE app whenever there is a push on the main branch of the repository.
