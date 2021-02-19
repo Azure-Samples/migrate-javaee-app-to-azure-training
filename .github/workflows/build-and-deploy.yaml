@@ -48,8 +48,8 @@ jobs:
           az webapp deploy --resource-group $GROUP --name $WEBAPP \
             --src-path db_files.zip --target-path "/home/site/deployments/tools" --restart false --type zip 
       
-    - name: Deploy WAR file
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.WEBAPP }}
-        package: target/applicationPetstore.war
+    # - name: Deploy WAR file
+    #   uses: azure/webapps-deploy@v2
+    #   with:
+    #     app-name: ${{ env.WEBAPP }}
+    #     package: target/applicationPetstore.war
