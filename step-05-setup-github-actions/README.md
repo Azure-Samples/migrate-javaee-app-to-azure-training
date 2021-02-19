@@ -35,7 +35,7 @@ The job that deploys our application will use the Azure CLI, so you will need to
 
 2. The Azure CLI command will output a JSON object with the Service Principal ID, access token, and other authentication information. Copy this JSON object.
 3. Open your browser to the GitHub Repository. Click **Settings** > **Secrets** > **New repository secrets**
-4. Paste the JSON object into a secret named **AZURE_CLI_CREDENTIALS**
+4. Paste the JSON object into a secret named **AZURE_CLI_CREDENTIALS**. The workflow file will reference this secret.
 
     ![Set the GitHub secret](media/set_github_secret.png)
 
@@ -43,7 +43,7 @@ The job that deploys our application will use the Azure CLI, so you will need to
 
 ## The workflow file
 
-The workflow shown below builds and deploys the WAR file. Copy and paste this as a new file into the `.github/workflows/` directory. Replace `your-webapp-name` with the name of your Azure webapp, and save the file as `build-and-deploy.yml`.
+The workflow shown below builds and deploys the WAR file and datasource configuration files. Copy and paste this as a new file into the `.github/workflows/` directory. Replace `your-webapp-name` with the name of your Azure webapp, if you used MySQL or Azure SQL, replace `3A-postgresql` with `3B-mysql` or `3C-sql` respectively. Save the file as `build-and-deploy.yml`.
 
 ```yaml
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
@@ -58,7 +58,7 @@ on:
   workflow_dispatch:
 
 env:
-  WEB_APP: your-webapp-name
+  WEB_APP: your-webapp-name   # Replace with your Azure web app's name
   SCRIPTS_DIR: 3A-postgresql  # Replace this with 3B-mysql or 3C-sql if you used MySQL or SQL
 
 jobs:
@@ -101,7 +101,7 @@ jobs:
 
 This workflow file consists of a single job that builds the `.war` application with Maven, then zips the database connection configuration files and driver. Finally, all the artifacts are uploaded to the web app using the Azure CLI [`az webapp deploy`](https://docs.microsoft.com/cli/azure/ext/webapp/webapp?view=azure-cli-latest#ext_webapp_az_webapp_deploy) command.
 
-This job is triggered whenever there is a push on the master branch, or it can be manually triggered using the GitHub web UI or API. For a full list of GitHub Actions triggers, see [this doc article](https://docs.github.com/actions/reference/events-that-trigger-workflows).
+This job is triggered whenever there is a push on the master branch, or it can be manually triggered using the GitHub web UI or API (via the `workflow_dispatch` trigger). For a full list of GitHub Actions triggers, see [this doc article](https://docs.github.com/actions/reference/events-that-trigger-workflows).
 
 ## More on GitHub Actions (Optional)
 
