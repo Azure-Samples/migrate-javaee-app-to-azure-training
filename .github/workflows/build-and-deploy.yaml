@@ -38,7 +38,7 @@ jobs:
     - name: zip the database artifacts
       run: zip -r db_files.zip .scripts/$SCRIPTS_DIR
     
-    - name: Azure CLI script
+    - name: Deploy data source artifacts
       uses: azure/CLI@v1
       with:
         azcliversion: 2.19.1
@@ -47,5 +47,9 @@ jobs:
           
           az webapp deploy --resource-group $GROUP --name $WEBAPP \
             --src-path db_files.zip --target-path "/home/site/deployments/tools" --restart false --type zip 
-          az webapp deploy --resource-group $GROUP --name $WEBAPP \
-            --src-path target/applicationPetstore.war --restart true
+      
+    - name: Deploy WAR file
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: $WEBAPP
+        package: target/applicationPetstore.war
