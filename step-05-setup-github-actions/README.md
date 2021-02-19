@@ -8,7 +8,7 @@ How to setup a GitHub Actions workflow file and the necessary secrets to continu
 
 GitHub Actions is an automation framework with CI/CD built-in and makes it easy to automate your software development workflows. Your automation can be triggered on events like when a commit is pushed, a comment is made, a pull request is opened, or on a schedule. These workflows are stored as `.yml` files in the `.github/workflows` directory of your repository. In this module, you will learn how to define a workflow to build and deploy a Java EE app whenever there is a push on the main branch of the repository.
 
-- [GitHub Actions documentation](https://docs.github.com/actions)
+> See the [GitHub Actions documentation](https://docs.github.com/actions) for more information.
 
 ## Set secrets on GitHub
 
@@ -16,14 +16,15 @@ The job that deploys our application will use the Azure CLI, so you will need to
 
 1. Run the shell commands below to create a Service Principal; replace the placeholders with your app name, resource group, subscription ID, and provide a memorable name for the Service Principal.
 
-  ```bash
-  SP_NAME="replace-this-with-a-name"
-  APP_NAME="replace-with-webapp-name"
-  RESOURCE_GROUP="your-resource-group"
-  SUBSCRIPTION="your-subscription-id"
-  az ad sp create-for-rbac --name $SP_NAME --sdk-auth --role contributor \
-    --scopes /subscriptions/$SUBSCRIPTION/resourceGroups/$RESOURCE_GROUP/providers/Microsoft.Web/sites/$APP_NAME
-  ```
+    ```bash
+    SP_NAME="replace-this-with-a-name"
+    APP_NAME="replace-with-your-webapp-name"
+    RESOURCE_GROUP="your-resource-group"
+    SUBSCRIPTION="your-subscription-id"
+
+    az ad sp create-for-rbac --name $SP_NAME --sdk-auth --role contributor \
+      --scopes /subscriptions/$SUBSCRIPTION/resourceGroups/$RESOURCE_GROUP/providers/Microsoft.Web/sites/$APP_NAME
+    ```
 
 2. The Azure CLI command will output a JSON object with the Service Principal ID, access token, and other authentication information. Copy this JSON object.
 3. Open your browser to the GitHub Repository. Click **Settings** > **Secrets** > **New repository secrets**
@@ -58,15 +59,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
 
-    - name: Set up Java version
+    - name: Set up Java 8
       uses: actions/setup-java@v1
       with:
         java-version: '8'
 
     - name: Build with Maven
-      run: mvn -B clean install -Dmaven.test.skip=true 
+      run: mvn -B clean package -Dmaven.test.skip=true 
 
     - name: Azure Login
       uses: azure/login@v1
@@ -114,13 +115,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up JDK 1.8
+    - name: Set up Java 8
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
+        java-version: 8
     
     - name: Build with Maven
-      run: mvn -B clean package
+      run: mvn -B clean package -Dmaven.test.skip=true
 ```
 
 ---
