@@ -10,7 +10,8 @@ on:
   workflow_dispatch:
 
 env:
-  WEB_APP: your-webapp-name   # Replace with your Azure web app's name
+  WEB_APP: jboss-freeberg   # Replace with your Azure web app's name
+  GROUP: freebergDemo
   SCRIPTS_DIR: 3A-postgresql  # Replace this with 3B-mysql or 3C-sql if you used MySQL or SQL
 
 jobs:
@@ -26,7 +27,7 @@ jobs:
         java-version: '8'
 
     - name: Build with Maven
-      run: mvn -B clean package -Dmaven.test.skip=true 
+      run: mvn clean package -Dmaven.test.skip=true -B
 
     - name: Azure Login
       uses: azure/login@v1
