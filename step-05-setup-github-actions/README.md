@@ -48,10 +48,11 @@ on:
   push:
     branches:
       - master
+      - main
   workflow_dispatch:
 
 env:
-  WEB_APP: your-webapp-name   # Replace with your JBoss site's name
+  WEBAPP: your-webapp-name   # Replace with your JBoss site's name
   GROUP: your-resource-group  # Replace with the resource group containing your JBoss EAP site
   SCRIPTS_DIR: 3A-postgresql  # Replace this with 3B-mysql or 3C-sql if you used MySQL or SQL
 
@@ -78,17 +79,21 @@ jobs:
     - name: zip the database artifacts
       run: zip -r db_files.zip .scripts/$SCRIPTS_DIR
     
-    - name: Azure CLI script
-        uses: azure/CLI@v1
-        with:
-          azcliversion: 2.19.1
-          inlineScript: |
-            az extension add --name webapp
-            
-            az webapp deploy --resource-group $GROUP --name $WEBAPP \
-              --src-path db_files.zip --target-path home/site/deployments/tools --restart false --type zip 
-            az webapp deploy --resource-group $GROUP --name $WEBAPP \
-              --src-path target/applicationPetstore.war --restart true --type war
+    - name: Deploy data source artifacts
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.19.1
+        inlineScript: |
+          az extension add --name webapp
+          
+          az webapp deploy --resource-group $GROUP --name $WEBAPP \
+            --src-path db_files.zip --target-path "/home/site/deployments/tools" --restart false --type zip 
+      
+    - name: Deploy WAR file
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.WEBAPP }}
+        package: target/applicationPetstore.war
 ```
 
 >🚧 - __Preview-specific__. The [`az webapp deploy`](https://github.com/azure/webapps-deploy) command is currently included as an extension in the Azure CLI. In the near future it will be available in the core Azure CLI commands.
