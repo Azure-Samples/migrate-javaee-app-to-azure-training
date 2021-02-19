@@ -96,7 +96,7 @@ jobs:
         package: target/applicationPetstore.war
 ```
 
->🚧 - __Preview-specific__. The [`az webapp deploy`](https://github.com/azure/webapps-deploy) command is currently included as an extension in the Azure CLI. In the near future it will be available in the core Azure CLI commands.
+>🚧 - __Preview-specific__. The `az webapp deploy`](https://docs.microsoft.com/cli/azure/ext/webapp/webapp?view=azure-cli-latest#ext_webapp_az_webapp_deploy) command is currently included as an extension in the Azure CLI. In the near future it will be available in the core Azure CLI commands.
 
 This workflow file consists of a single job that builds the `.war` application with Maven, then zips the database connection configuration files and driver. Finally, all the artifacts are uploaded to the web app using the Azure CLI [`az webapp deploy`](https://docs.microsoft.com/cli/azure/ext/webapp/webapp?view=azure-cli-latest#ext_webapp_az_webapp_deploy) command.
 
