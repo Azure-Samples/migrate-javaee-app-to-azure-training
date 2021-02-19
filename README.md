@@ -69,10 +69,6 @@ Bind the Java EE application to the database.
 
 Configure and monitor Java EE application and its dependencies using Azure Monitor.
 
-## [05 - Continuously Deploy using GitHub Actions](step-05-setup-github-actions/README.md) (15 minutes)
-
-Create a GitHub Actions workflow file and secrets to continuously deploy a Java EE application.
-
 ## [Conclusion](step-99-conclusion/README.md) (5 minutes)
 
 ---
