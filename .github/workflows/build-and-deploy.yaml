@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  WEB_APP: jboss-freeberg   # Replace with your Azure web app's name
+  WEBAPP: jboss-freeberg   # Replace with your Azure web app's name
   GROUP: freebergDemo
   SCRIPTS_DIR: 3A-postgresql  # Replace this with 3B-mysql or 3C-sql if you used MySQL or SQL
 
