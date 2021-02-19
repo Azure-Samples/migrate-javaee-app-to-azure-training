@@ -36,7 +36,7 @@ The job that deploys our application will use the Azure CLI, so you will need to
 
 ## The workflow file
 
-The workflow shown below builds and deploys the WAR file and datasource configuration files. Copy and paste this as a new file into the `.github/workflows/` directory. Replace `your-webapp-name` with the name of your Azure webapp, if you used MySQL or Azure SQL, replace `3A-postgresql` with `3B-mysql` or `3C-sql` respectively. Save the file as `build-and-deploy.yml`.
+The workflow shown below builds and deploys the WAR file and datasource configuration files. Copy and paste this as a new file into the `.github/workflows/` directory. Replace `your-webapp-name` with the name of your Azure webapp, replace `your-resource-group` with the resource group containing your app. If you used MySQL or Azure SQL, replace `3A-postgresql` with `3B-mysql` or `3C-sql` respectively. Save the file as `build-and-deploy.yml`.
 
 ```yaml
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
@@ -51,7 +51,8 @@ on:
   workflow_dispatch:
 
 env:
-  WEB_APP: your-webapp-name   # Replace with your Azure web app's name
+  WEB_APP: your-webapp-name   # Replace with your JBoss site's name
+  GROUP: your-resource-group  # Replace with the resource group containing your JBoss EAP site
   SCRIPTS_DIR: 3A-postgresql  # Replace this with 3B-mysql or 3C-sql if you used MySQL or SQL
 
 jobs:
