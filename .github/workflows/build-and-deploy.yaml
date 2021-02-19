@@ -46,6 +46,6 @@ jobs:
           az extension add --name webapp
           
           az webapp deploy --resource-group $GROUP --name $WEBAPP \
-            --src-path db_files.zip --target-path home/site/deployments/tools --restart false --type zip 
+            --src-path db_files.zip --target-path "/home/site/deployments/tools" --restart false --type zip 
           az webapp deploy --resource-group $GROUP --name $WEBAPP \
             --src-path target/applicationPetstore.war --restart true
