@@ -102,9 +102,9 @@ This workflow file consists of a single job that builds the `.war` application w
 
 This job is triggered whenever there is a push on the master branch, or it can be manually triggered using the GitHub web UI or API (via the `workflow_dispatch` trigger). For a full list of GitHub Actions triggers, see [this doc article](https://docs.github.com/actions/reference/events-that-trigger-workflows).
 
-## More on GitHub Actions (Optional)
+## Add Continuous Integration checks for Pull Requests (Optional)
 
-The GitHub Actions workflow featured in this module will build and deploy whenever there is a push on the main branch of the repository. You can create a second workflow to build and test the application whenever a Pull Request is opened on the repository. This will automate the testing process for every proposed contribution, saving time and manual effort. An example workflow for this is shown below. You can save this as a new workflow file in the `.github/workflows/` directory.
+You can create a second workflow to build the application whenever a Pull Request is opened on the repository. This will automate part of the testing process for every proposed contribution, saving time and manual effort. An example workflow for this is shown below. You can save this as a new workflow file in the `.github/workflows/` directory. This workflow does **not** deploy the application. 
 
 ```yml
 name: Java CI with Maven
@@ -129,6 +129,10 @@ jobs:
     - name: Build with Maven
       run: mvn -B clean package -Dmaven.test.skip=true
 ```
+
+## View workflow runs in GitHub
+
+// TODO
 
 ---
 
