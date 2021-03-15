@@ -57,7 +57,7 @@ env:
   SCRIPTS_DIR: 3A-postgresql  # Replace this with 3B-mysql or 3C-sql if you used MySQL or SQL
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -132,7 +132,13 @@ jobs:
 
 ## View workflow runs in GitHub
 
-// TODO
+To view the progress of your workflow run and its logs, open the **Actions** tab at the top of the repository. The left-side menu shows a list of the workflows in the repository, select a workflow to narrow the workflow runs that are shown in the middle. 
+
+![View build and deployment logs](media/view_logs.png)
+
+To view the logs of a specific workflow run, click it from the list. The following page will show all of the jobs within the workflow. Next, select a job on the left side. The page will now show a list of all the steps in that job. From here, you can expand a job to view the logs and use the search bar on the top-right to search the commands and output.
+
+![View build and deployment logs](media/search_logs.png)
 
 ---
 
