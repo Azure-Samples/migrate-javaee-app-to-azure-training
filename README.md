@@ -69,9 +69,13 @@ Bind the Java EE application to the database.
 
 Configure and monitor Java EE application and its dependencies using Azure Monitor.
 
-## [05 - Continuously Deploy using GitHub Actions](step-05-setup-github-actions/README.md) (15 minutes)
+## [05 - Continuously Deploy using GitHub Actions](step-05-setup-github-actions/README.md) (20 minutes)
 
 Create a GitHub Actions workflow file to continuously deploy a Java EE application.
+
+## [06 - Secure Secrets in Key Vault](step-06-secure-secrets-in-key-vault/README.md) (15 minutes)
+
+Securely store the database credentials in Key Vault and use Key Vault References to retrieve the secrets with no code changes.
 
 ## [Conclusion](step-99-conclusion/README.md) (5 minutes)
 
