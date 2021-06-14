@@ -101,8 +101,6 @@ az monitor diagnostic-settings create --name "send-logs-and-metrics-to-log-analy
 
 ## Create and configure Application Insights
 
-You can create an Application Insights resource using CLI, use a resource created by default once you enable monitoring in App Service, or use an existing Application Insights resource
-
 ### Create an Application Insights resource using CLI
 
 Add Azure CLI extension for Application Insights:
@@ -124,7 +122,7 @@ export APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=$(az monitor \
 ```
 
 ### Enable and configure monitoring with Application Insights in Azure Portal
-Open the App Service resource in Azure portal. Click Applcation Insigths. You can either stick with the existing Application Insights and Log Analytics, or get new ones created for you automatically.
+Open the App Service resource in Azure portal. Click Application Insigths.
 
 ![](./media/app-service-ai-menu-sh.png)
 
@@ -133,7 +131,29 @@ Click 'Turn on Application Insights'
 ![](./media/app-service-enable-ai-sh.png)
 
 
-Under 'Java' tab, you can [configure](https://docs.microsoft.com/azure/azure-monitor/app/java-standalone-config) your Application Insights - just paste the whole configuration file into the text box, leave out the configuration string though - see an example [here](https://docs.microsoft.com/azure/azure-monitor/app/java-standalone-config#an-example).
+Under 'Java' tab, you can [configure](https://docs.microsoft.com/azure/azure-monitor/app/java-standalone-config) your Application Insights - just paste the whole configuration file into the text box, leave out the configuration string though. The example below configures your telemetry to be sampled at 50%, logging to be at INFO level and above, self diagnostics to be written to both file and console, at INFO level and above.
+
+```json
+{
+  "sampling": {
+    "percentage": 50
+  },
+  "instrumentation": {
+    "logging": {
+      "level": "INFO"
+    }
+  },
+  "selfDiagnostics": {
+    "destination": "file+console",
+    "level": "INFO",
+    "file": {
+      "path": "applicationinsights.log",
+      "maxSizeMb": 5,
+      "maxHistory": 1
+    }
+  }
+}
+```
 
 ![](./media/app-service-configure-ai-sh.png)
 
