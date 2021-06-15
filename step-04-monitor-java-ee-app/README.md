@@ -122,6 +122,7 @@ export APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=$(az monitor \
 ```
 
 ### Enable and configure monitoring with Application Insights in Azure Portal
+
 Open the App Service resource in Azure portal. Click Application Insights.
 
 ![](./media/app-service-ai-menu-sh.png)
