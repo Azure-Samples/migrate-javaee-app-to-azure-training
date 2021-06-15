@@ -131,12 +131,12 @@ Click 'Turn on Application Insights'
 ![](./media/app-service-enable-ai-sh.png)
 
 
-Under 'Java' tab, you can [configure](https://docs.microsoft.com/azure/azure-monitor/app/java-standalone-config) your Application Insights - just paste the whole configuration file into the text box, leave out the configuration string though. The example below configures your telemetry to be sampled at 50%, logging to be at INFO level and above, self diagnostics to be written to both file and console, at INFO level and above.
+Under 'Java' tab, you can [configure](https://docs.microsoft.com/azure/azure-monitor/app/java-standalone-config) your Application Insights - just paste the whole configuration file into the text box, leave out the configuration string though. The example below configures your telemetry to be sampled at 100% (all of the telemetry will appear in Application Insights), logging to be at INFO level and above, self diagnostics to be written to both file and console, at INFO level and above.
 
 ```json
 {
   "sampling": {
-    "percentage": 50
+    "percentage": 100
   },
   "instrumentation": {
     "logging": {
