@@ -27,9 +27,9 @@ Next, provision an Azure Key Vault, provide access to the identity you just crea
 1. Create the Key Vault using the Azure CLI.
 
     ```bash
-    az keyvault create --name jboss-app-key-vault              \
-                        --resource-group <your_resource_group> \
-                        --location <location>                  \
+    az keyvault create --name ${WEBAPP}-key-vault              \
+                        --resource-group ${RESOURCE_GROUP}     \
+                        --location ${REGION}                   \
                         --enabled-for-deployment true          \
                         --enabled-for-disk-encryption true     \
                         --enabled-for-template-deployment true \
@@ -39,7 +39,7 @@ Next, provision an Azure Key Vault, provide access to the identity you just crea
 1. Now grant the managed identity `get` and `list` access to the Key Vault.
 
     ```bash
-    az keyvault set-policy --name java-app-key-vault     \
+    az keyvault set-policy --name ${WEBAPP}-key-vault     \
                             --secret-permission get list  \
                             --object-id <the principal ID from earlier>
     ```
@@ -67,15 +67,15 @@ The secrets will be exposed as environment variables to the JBoss application, s
 1. Get the URI’s of your three secrets. Run the commands below and copy the `id` value in the console output.
 
     ```bash
-    az keyvault secret show --vault-name java-app-key-vault --name POSTGRES-URL
-    az keyvault secret show --vault-name java-app-key-vault --name POSTGRES-USERNAME
-    az keyvault secret show --vault-name java-app-key-vault --name POSTGRES-PASSWORD
+    az keyvault secret show --vault-name ${WEBAPP}-key-vault --name POSTGRES-URL
+    az keyvault secret show --vault-name ${WEBAPP}-key-vault --name POSTGRES-USERNAME
+    az keyvault secret show --vault-name ${WEBAPP}-key-vault --name POSTGRES-PASSWORD
     ```
 
 2. Now create the app settings with the Key Vault references. For each setting, replace “YOUR_SECRET_URI” with the corresponding id’s from the previous step.
 
     ```bash
-    az webapp config appsettings set -n <your_app_name> -g <resource_group> --settings \
+    az webapp config appsettings set -n ${WEBAPP} -g ${RESOURCE_GROUP} --settings \
         SPRING_DATASOURCE_URL=@Microsoft.KeyVault(SecretUri=YOUR_SECRET_URI) \
         SPRING_DATASOURCE_USERNAME=@Microsoft.KeyVault(SecretUri=YOUR_SECRET_URI)\
         SPRING_DATASOURCE_PASSWORD=@Microsoft.KeyVault(SecretUri=YOUR_SECRET_URI)
