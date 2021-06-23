@@ -144,4 +144,4 @@ To view the logs of a specific workflow run, click it from the list. The followi
 
 ⬅️ Previous guide: [Step 04 - Monitor Java EE Application](../step-04-monitor-java-ee-app/README.md)
 
-➡️ Next guide: [Conclusion](../step-99-conclusion/README.md)
+➡️ Next guide: [Step 05 - Secure Secrets in Key vault](../step-99-conclusion/README.md)
