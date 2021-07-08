@@ -264,7 +264,7 @@
           <runtime>
             <os>Linux</os>
             <javaVersion>Java 8</javaVersion>
-            <webContainer>Jbosseap 7.2</webContainer>
+            <webContainer>Jbosseap 7</webContainer>
           </runtime>
           <deployment>
             <resources>
